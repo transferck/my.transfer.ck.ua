@@ -71,10 +71,17 @@
 					<li><a class="nav-link {{ Request::is('agents-all') ? 'active' : null }}" href="{{ url('/agents-all') }}">{!! trans('titles.agents-allNav') !!}</a></li>
 				@endif
 				@if (Auth::user() && Auth::user()->hasRole(['admin', 'agent']))
-					<li><a class="nav-link {{ Request::is('orders/create') ? 'active' : null }}" href="{{ url('orders/create') }}">{!! trans('titles.agentNewOrder') !!}</a></li>
-					<li><a class="nav-link {{ Request::is('orders') ? 'active' : null }}" href="{{ url('/orders') }}">{!! trans('titles.orderDropdownNav') !!}</a></li>
-					<li><a class="nav-link {{ Request::is('orders-stats') ? 'active' : null }}" href="{{ url('/orders-stats') }}">{!! trans('titles.orders-statsNav') !!}</a></li>
-					<li><a class="nav-link {{ Request::is('partners') ? 'active' : null }}" href="{{ url('/partners') }}">{!! trans('titles.partnersNav') !!}</a></li>	
+					<li class="nav-item dropdown">
+						 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Agent
+                        </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item {{ Request::is('orders/create') ? 'active' : null }}" href="{{ url('orders/create') }}">{!! trans('titles.agentNewOrder') !!}</a>
+							<a class="dropdown-item {{ Request::is('orders') ? 'active' : null }}" href="{{ url('/orders') }}">{!! trans('titles.orderDropdownNav') !!}</a>
+							<a class="dropdown-item {{ Request::is('orders-stats') ? 'active' : null }}" href="{{ url('/orders-stats') }}">{!! trans('titles.orders-statsNav') !!}</a>
+							<a class="dropdown-item {{ Request::is('partners') ? 'active' : null }}" href="{{ url('/partners') }}">{!! trans('titles.partnersNav') !!}</a>
+						</div>
+					</li>					
 				@endif				
             </ul>
             {{-- Right Side Of Navbar --}}
