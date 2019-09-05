@@ -14,7 +14,7 @@ class AddSoftdeletesToThreadsTable extends Migration
      */
     public function up()
     {
-        Schema::table(Models::table('threads'), function (Blueprint $table) {
+        Schema::table('threads', function (Blueprint $table) {
             $table->softDeletes();
         });
     }
@@ -26,7 +26,7 @@ class AddSoftdeletesToThreadsTable extends Migration
      */
     public function down()
     {
-        Schema::table(Models::table('threads'), function (Blueprint $table) {
+        Schema::table('threads', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }
