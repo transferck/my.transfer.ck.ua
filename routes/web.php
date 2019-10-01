@@ -13,15 +13,6 @@
 |
 */
 
-
-Route::group(['prefix' => 'messages'], function () {
-    Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
-    Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
-    Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
-    Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
-    Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
-});
-
 // Homepage Route
 Route::group(['middleware' => ['web', 'checkblocked']], function () {
     Route::get('/', 'UserController@index')->name('index');
@@ -144,6 +135,28 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
     Route::get('orders-all/api', 'OrdersManagementController@allOrdersApi')->name('orders-api.all');
     Route::get('orders-index/api', 'OrdersManagementController@ordersApi')->name('orders-api.index');
     Route::get('agents/api', 'OrderAgentController@allAgentsApi')->name('agents-api.all');
+	
+    Route::resource('cars', 'CarsManagementController', [
+        'names' => [
+            'index'   => 'cars',
+            'destroy' => 'cars.destroy',
+        ],
+    ]);	
+
+    Route::resource('costs', 'CostsManagementController', [
+        'names' => [
+            'index'   => 'costs',
+            'destroy' => 'costs.destroy',
+        ],
+    ]);
+
+    Route::resource('categorycosts', 'CategoryCostsManagementController', [
+        'names' => [
+            'index'   => 'categorycosts',
+            'destroy' => 'categorycosts.destroy',
+        ],
+    ]);		
+	
 
 });
 
@@ -171,10 +184,10 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
             'index'   => 'themes',
             'destroy' => 'themes.destroy',
         ],
-    ]);
+    ]);	
 
-    Route::resource('cars', 'CarsManagementController');
-    Route::resource('costs', 'CostsManagementController');
+    //Route::resource('cars', 'CarsManagementController');
+    //Route::resource('costs', 'CostsManagementController');
 
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('routes', 'AdminDetailsController@listRoutes');

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Car extends Model
+class CategoryCost extends Model
 {
     use SoftDeletes;
 
@@ -14,7 +14,7 @@ class Car extends Model
      *
      * @var string
      */
-    protected $table = 'cars';
+    protected $table = 'category_costs';
 
     /**
      * The attributes that are not mass assignable.
@@ -31,19 +31,9 @@ class Car extends Model
      * @var array
      */
     protected $fillable = [
-		'manufacturer', 
-		//'model', 
-		'registration_number', 
-		'side_number', 
-		'purchase_date', 
-		'mileage', 
-		'release_date', 
-		'condition', 
-		'color', 
-		'notes', 
-		'status',
-        'taggable_id',
-        'taggable_type',
+        'name', 
+        'position',
+		'img', 
     ];
 
     /**
@@ -66,19 +56,10 @@ class Car extends Model
     {
         return array_merge(
             [
-                //'name'   => 'required|min:3|max:50|unique:themes,name'.($id ? ",$id" : ''),
-                //'link'   => 'required|min:3|max:255|unique:themes,link'.($id ? ",$id" : ''),
-				'manufacturer'  => 'required',
-				//'model'  => 'required',
-				'registration_number'  => 'required',
-				'side_number'  => 'required',
-				'purchase_date'  => 'required',
-				'mileage'  => 'required',
-				'release_date'  => 'required',
-				'condition'  => 'required',
-				'color' => 'required', 			
-                'notes'  => 'max:500',
-                'status' => 'required',
+                //'name'   => 'required|min:3|max:50|unique:categorycosts,name'.($id ? ",$id" : ''),
+				'name' => 'required',
+				//'img' => 'required',
+				'position' => 'required',
             ],
             $merge);
     }
@@ -88,14 +69,8 @@ class Car extends Model
      *
      * @var array
      */
-    public function profile()
-    {
-        return $this->hasMany('App\Models\Profile');
-    }
-	
     public function car()
     {
         return $this->hasMany('App\Models\Car');
     }
-	
 }

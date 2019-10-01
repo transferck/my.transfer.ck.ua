@@ -56,7 +56,7 @@
                     </li>
                 @endrole
 				@role('admin')
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown d-none">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Operator
                         </a>
@@ -71,7 +71,7 @@
 					<li><a class="nav-link {{ Request::is('agents-all') ? 'active' : null }}" href="{{ url('/agents-all') }}">{!! trans('titles.agents-allNav') !!}</a></li>
 				@endif
 				@if (Auth::user() && Auth::user()->hasRole(['admin', 'agent']))
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown d-none">
 						 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Agent
                         </a>
@@ -82,7 +82,34 @@
 							<a class="dropdown-item {{ Request::is('partners') ? 'active' : null }}" href="{{ url('/partners') }}">{!! trans('titles.partnersNav') !!}</a>
 						</div>
 					</li>					
-				@endif				
+				@endif	
+				<li class="nav-item dropdown">
+					 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Автопарк
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item {{ Request::is('cars/create') ? 'active' : null }}" href="{{ url('cars/create') }}">{!! trans('cars.AddCar') !!}</a>
+						<a class="dropdown-item {{ Request::is('cars') ? 'active' : null }}" href="{{ url('/cars') }}">{!! trans('cars.Cars') !!}</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Расходы
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item {{ Request::is('cars/create') ? 'active' : null }}" href="{{ url('costs/create') }}">{!! trans('costs.AddCost') !!}</a>
+						<a class="dropdown-item {{ Request::is('cars') ? 'active' : null }}" href="{{ url('/costs') }}">{!! trans('costs.Costs') !!}</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Категория расходов
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item {{ Request::is('categorycosts/create') ? 'active' : null }}" href="{{ url('categorycosts/create') }}">{!! trans('categorycosts.AddCategoryCost') !!}</a>
+						<a class="dropdown-item {{ Request::is('categorycosts') ? 'active' : null }}" href="{{ url('/categorycosts') }}">{!! trans('categorycosts.CategoryCosts') !!}</a>
+					</div>
+				</li>				
             </ul>
             {{-- Right Side Of Navbar --}}
             <ul class="navbar-nav ml-auto">
