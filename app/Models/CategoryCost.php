@@ -34,6 +34,7 @@ class CategoryCost extends Model
         'name', 
         'position',
 		'img', 
+		'group',
     ];
 
     /**
@@ -43,6 +44,17 @@ class CategoryCost extends Model
      */
     protected $dates = [
         'deleted_at',
+    ];
+
+    public static $GROUPS = [
+        'default', 'support_repair', 'others'
+    ];
+
+    public static $GROUPS_LABELS = [
+        '' => 'Не выбрано',
+        'default' => 'Без заголовка',
+        'support_repair' => 'Обслуживание и ремонт',
+        'others' => 'Прочее',
     ];
 
     /**
@@ -72,5 +84,37 @@ class CategoryCost extends Model
     public function car()
     {
         return $this->hasMany('App\Models\Car');
+    }
+
+    public function costsByCar(Car $car)
+    {
+        $sum = 0;
+        $costs = Cost::query()
+            ->where('category_consumption', $this->id)
+            ->where('car_id', $car->id)
+            ->get();
+
+        if ($costs->isEmpty()) {
+            return (object) compact('costs', 'sum');
+        }
+
+        foreach ($costs as $cost) {
+            $sum += $cost->purchase_cost + $cost->work_price;
+        }
+
+        return (object) compact('costs', 'sum');
+    }
+
+    public static function getInGroups()
+    {
+        $results = [];
+        foreach (self::$GROUPS as $group) {
+            $results[$group] = self::query()
+                ->where('group', $group)
+                ->orderBy('position', 'DESC')
+                ->get();
+        }
+
+        return $results;
     }
 }

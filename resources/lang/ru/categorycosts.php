@@ -24,7 +24,10 @@ return [
     'namePlaceholder'  		 			 	 => '',
 	
     'positionLabel'     	 				 => 'Позиция',
-    'positionPlaceholder'  	 	 			 => '',	
+    'positionPlaceholder'  	 	 			 => '',
+
+    'groupLabel'     	 				     => 'Группа',
+    'groupPlaceholder'  	 	 			 => '',
 
     'subcategory_consumptionLabel'     		 => 'Подкатегория',
     'subcategory_consumptionPlaceholder'     => 'Не выбран',

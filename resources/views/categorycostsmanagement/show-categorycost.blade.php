@@ -52,6 +52,9 @@
                     <ul class="list-group list-group-responsive categorycost-details-list margin-bottom-3">
                         <li class="list-group-item"><strong>Id</strong> <span>{{ $categorycost->id }}</span></li>
 						<li class="list-group-item"><strong>Position</strong> <span>{{ $categorycost->position }}</span></li>
+						<li class="list-group-item"><strong>Group</strong> <span>
+                                {{ \App\Models\CategoryCost::$GROUPS_LABELS[$categorycost->group] }}
+                            </span></li>
                     </ul>
 
                     @if(count($categorycostCosts) > 0)

@@ -44,8 +44,6 @@ class CategoryCostsManagementController extends Controller
      */
     public function create()
     {
-		$cars = Car::all();
-		
 		return view('categorycostsmanagement.add-categorycost', [
           'categorycost'    => null,
 		  'cars' => Car::all()
@@ -73,6 +71,7 @@ class CategoryCostsManagementController extends Controller
 			'name'         		=> $request->input('name'),
 			'img'         		=> $request->input('img'),
             'position'          => $request->input('position'),
+            'group'             => $request->input('group'),
         ]);
 
         $categorycost->save();
@@ -137,7 +136,7 @@ class CategoryCostsManagementController extends Controller
     {
         $categorycost = CategoryCost::find($id);
 
-       $input = Input::only('name', 'img', 'position');
+        $input = Input::only('name', 'img', 'position', 'group');
 
         $validator = Validator::make($input, CategoryCost::rules($id));
 
