@@ -103,7 +103,7 @@
 						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
 					</div>
 					<div class="card-body text-center">
-						<img src="/images/icons/costcategory/1.jpg" alt="" class="img-fluid w-50">
+						<img src="{{ $aCategoryCost->img }}" alt="" class="img-fluid w-50">
 					</div>
 					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
 						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
@@ -138,7 +138,7 @@
 						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
 					</div>
 					<div class="card-body text-center">
-						<img src="/images/icons/costcategory/1.jpg" alt="" class="img-fluid w-50">
+						<img src="{{ $aCategoryCost->img }}" alt="" class="img-fluid w-50">
 					</div>
 					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
 						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
@@ -173,7 +173,7 @@
 						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
 					</div>
 					<div class="card-body text-center">
-						<img src="/images/icons/costcategory/1.jpg" alt="" class="img-fluid w-50">
+						<img src="{{ $aCategoryCost->img }}" alt="" class="img-fluid w-50">
 					</div>
 					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
 						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
