@@ -73,4 +73,23 @@ class CategoryCost extends Model
     {
         return $this->hasMany('App\Models\Car');
     }
+
+    public function costsByCar(Car $car)
+    {
+        $sum = 0;
+        $costs = Cost::query()
+            ->where('category_consumption', $this->id)
+            ->where('car_id', $car->id)
+            ->get();
+
+        if ($costs->isEmpty()) {
+            return (object) compact('costs', 'sum');
+        }
+
+        foreach ($costs as $cost) {
+            $sum += $cost->purchase_cost + $cost->work_price;
+        }
+
+        return (object) compact('costs', 'sum');
+    }
 }

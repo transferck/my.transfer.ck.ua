@@ -98,9 +98,8 @@ class CarsManagementController extends Controller
     public function show($id)
     {
         $car = Car::find($id);
-        $categorycosts = CategoryCost::orderBy('position', 'asc')->get();				
-		//$categorycosts = CategoryCost::all();
-        $cars = Car::all();		
+        $categorycosts = CategoryCost::orderBy('position', 'asc')->get();
+
         $costs = Cost::all();
         $carCosts = [];
 
@@ -110,16 +109,7 @@ class CarsManagementController extends Controller
             }
         }
 
-        $data = [
-            'car'       	=> $car,
-            'carCosts'  	=> $carCosts,
-			'costs'  		=> $costs,
-			'categorycosts' => $categorycosts,
-			//'costs' 		=> Cost::all(),
-			//'categorycosts' => CategoryCost::all()
-        ];
-
-        return view('carsmanagement.show-car')->with($data);
+        return view('carsmanagement.show-car', compact('car', 'categorycosts', 'carCosts'));
     }
 
     /**

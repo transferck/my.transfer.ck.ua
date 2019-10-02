@@ -92,10 +92,21 @@ class Car extends Model
     {
         return $this->hasMany('App\Models\Profile');
     }
-	
-    public function car()
+
+    public function getLastCostMileage()
     {
-        return $this->hasMany('App\Models\Car');
+        $cost = Cost::query()
+            ->where('car_id', $this->id)
+            ->whereNotNull('mileage')
+            ->where('mileage', '!=', 0)
+            ->where('mileage', '!=', '')
+            ->orderBy('updated_at', 'DESC')
+            ->first();
+
+        if (!$cost) {
+            return 0;
+        }
+
+        return $cost->mileage;
     }
-	
 }

@@ -49,17 +49,17 @@
 				<div class="position-absolute" style="left: 0;top: 35%;">
 					@if($car->side_number != null)
 						<div class="cost-summ" style="top: 40px;">
-							<span class="badge badge-success">{{ $car->side_number }}</b></span>
+							<span class="badge badge-success">{{ $car->side_number }}</span>
 						</div>
 					@endif	
 					@if($car->mileage != null)
 						<div class="mileage-buy" style="top: 80px;">
-							<span class="badge badge-success">{{ $car->mileage }}</b></span>
+							<span class="badge badge-success">{{ $car->mileage }}</span>
 						</div>
 					@endif
 					@if($car->side_number != null)
 						<div class="mileage" style="top: 40px;">
-							<span class="badge badge-success">{{ $car->mileage }}</b></span>
+							<span class="badge badge-success">{{ $car->getLastCostMileage() }}</span>
 						</div>
 					@endif				
 				</div>
@@ -67,7 +67,7 @@
 				<div class="position-absolute" style="right: 0;top: 35%;">
 					@if($car->registration_number != null)
 						<div class="cost-summ" style="top: 80px;">
-							<span class="badge badge-success">{{ $car->registration_number }}</b></span>
+							<span class="badge badge-success">{{ $car->registration_number }}</span>
 						</div>
 					@endif				
 				</div>	
@@ -85,12 +85,9 @@
     <div class="row">
 		@foreach($categorycosts as $aCategoryCost)
 			@php
-				$carCategoryCosts = 0;
-				foreach($costs as $cost) {
-					if($cost && $cost->categorycost_id === $aCategoryCost->id) {
-					   $carCategoryCosts += 1;
-					}
-				}
+				$costsByCarCategory = $aCategoryCost->costsByCar($car);
+				$carCategoryCosts = $costsByCarCategory->costs->count();
+
 				if($carCategoryCosts === 1) {
 					$carCountClass = 'info';
 				} elseif($carCategoryCosts >= 2) {
@@ -104,19 +101,19 @@
 			<div class="col-md-2 mb-3">
 				<div class="card">
 					<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
-						<span class="badge badge-success">{{ $carCategoryCosts }}</b></span>
+						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
 					</div>
 					<div class="card-body text-center">
 						<img src="/images/icons/costcategory/1.jpg" alt="" class="img-fluid w-50">
 					</div>
 					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
-						<span class="badge badge-success">Cумма: <b>0 грн.</b></span>
+						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
 					</div>					
 				</div>
-				<h6 class="text-center mt-3"><b>{{ $aCategoryCost->name }}</b></h6>	
+				<h6 class="text-center mt-3"><b>{{ $aCategoryCost->name }}</b></h6>
 			
 			</div>
-		@endforeach;		
+		@endforeach
     </div>
 	<div class="row pt-5">
 		<div class="col-sm-6 mb-2">
