@@ -56,7 +56,22 @@
 											@endif
 										</div>
 									</div>
-								</div>								
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group has-feedback {{ $errors->has('group') ? ' has-error ' : '' }}">
+										{!! Form::label('position', trans('categorycosts.groupLabel'), array('class' => 'col-md-12 control-label required')); !!}
+										<div class="col-md-12">
+											<div class="input-group">
+												{!! Form::select('group', \App\Models\CategoryCost::$GROUPS_LABELS, array('id' => 'group', 'class' => 'form-control', 'placeholder' => trans('categorycosts.groupPlaceholder'))) !!}
+											</div>
+											@if ($errors->has('position'))
+												<span class="help-block">
+													<strong>{{ $errors->first('group') }}</strong>
+												</span>
+											@endif
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="form-row">
 								<div class="col-sm-12">

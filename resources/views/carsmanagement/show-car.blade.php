@@ -81,9 +81,8 @@
 			</div>
 		</div>
 	</div>
-	<h2 class="text-center mt-5 mb-5">Обслуживание и ремонт</h2>	
-    <div class="row">
-		@foreach($categorycosts as $aCategoryCost)
+    <div class="row mt-5 d-flex justify-content-center">
+		@foreach($categorycosts['default'] as $aCategoryCost)
 			@php
 				$costsByCarCategory = $aCategoryCost->costsByCar($car);
 				$carCategoryCosts = $costsByCarCategory->costs->count();
@@ -108,13 +107,84 @@
 					</div>
 					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
 						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
-					</div>					
+					</div>
 				</div>
 				<h6 class="text-center mt-3"><b>{{ $aCategoryCost->name }}</b></h6>
-			
+
 			</div>
 		@endforeach
     </div>
+
+	<h2 class="text-center mt-5 mb-5">Обслуживание и ремонт</h2>
+	<div class="row d-flex justify-content-center">
+		@foreach($categorycosts['support_repair'] as $aCategoryCost)
+			@php
+				$costsByCarCategory = $aCategoryCost->costsByCar($car);
+				$carCategoryCosts = $costsByCarCategory->costs->count();
+
+				if($carCategoryCosts === 1) {
+					$carCountClass = 'info';
+				} elseif($carCategoryCosts >= 2) {
+					$carCountClass = 'warning';
+				} elseif($carCategoryCosts === 5) {
+					$carCountClass = 'success';
+				} elseif($carCategoryCosts === 10) {
+					$carCountClass = 'danger';
+				}
+			@endphp
+			<div class="col-md-2 mb-3">
+				<div class="card">
+					<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
+						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
+					</div>
+					<div class="card-body text-center">
+						<img src="/images/icons/costcategory/1.jpg" alt="" class="img-fluid w-50">
+					</div>
+					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
+						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
+					</div>
+				</div>
+				<h6 class="text-center mt-3"><b>{{ $aCategoryCost->name }}</b></h6>
+
+			</div>
+		@endforeach
+	</div>
+
+	<h2 class="text-center mt-5 mb-5">Прочее</h2>
+	<div class="row d-flex justify-content-center">
+		@foreach($categorycosts['others'] as $aCategoryCost)
+			@php
+				$costsByCarCategory = $aCategoryCost->costsByCar($car);
+				$carCategoryCosts = $costsByCarCategory->costs->count();
+
+				if($carCategoryCosts === 1) {
+					$carCountClass = 'info';
+				} elseif($carCategoryCosts >= 2) {
+					$carCountClass = 'warning';
+				} elseif($carCategoryCosts === 5) {
+					$carCountClass = 'success';
+				} elseif($carCategoryCosts === 10) {
+					$carCountClass = 'danger';
+				}
+			@endphp
+			<div class="col-md-2 mb-3">
+				<div class="card">
+					<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
+						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
+					</div>
+					<div class="card-body text-center">
+						<img src="/images/icons/costcategory/1.jpg" alt="" class="img-fluid w-50">
+					</div>
+					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
+						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
+					</div>
+				</div>
+				<h6 class="text-center mt-3"><b>{{ $aCategoryCost->name }}</b></h6>
+
+			</div>
+		@endforeach
+	</div>
+
 	<div class="row pt-5">
 		<div class="col-sm-6 mb-2">
 			<a href="/cars/{{$car->id}}/edit" class="btn btn-small btn-info btn-block">

@@ -34,6 +34,7 @@ class CategoryCost extends Model
         'name', 
         'position',
 		'img', 
+		'group',
     ];
 
     /**
@@ -43,6 +44,17 @@ class CategoryCost extends Model
      */
     protected $dates = [
         'deleted_at',
+    ];
+
+    public static $GROUPS = [
+        'default', 'support_repair', 'others'
+    ];
+
+    public static $GROUPS_LABELS = [
+        '' => 'Не выбрано',
+        'default' => 'Без заголовка',
+        'support_repair' => 'Обслуживание и ремонт',
+        'others' => 'Прочее',
     ];
 
     /**
@@ -91,5 +103,18 @@ class CategoryCost extends Model
         }
 
         return (object) compact('costs', 'sum');
+    }
+
+    public static function getInGroups()
+    {
+        $results = [];
+        foreach (self::$GROUPS as $group) {
+            $results[$group] = self::query()
+                ->where('group', $group)
+                ->orderBy('position', 'DESC')
+                ->get();
+        }
+
+        return $results;
     }
 }

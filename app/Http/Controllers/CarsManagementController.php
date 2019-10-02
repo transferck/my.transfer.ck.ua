@@ -98,16 +98,11 @@ class CarsManagementController extends Controller
     public function show($id)
     {
         $car = Car::find($id);
-        $categorycosts = CategoryCost::orderBy('position', 'asc')->get();
+        $categorycosts = CategoryCost::getInGroups();
 
-        $costs = Cost::all();
-        $carCosts = [];
-
-        foreach ($costs as $cost) {
-            if ($cost && $cost->car_id === $car->id) {
-                $carCosts[] = $cost;
-            }
-        }
+        $carCosts = Cost::query()
+            ->where('car_id', $car->id)
+            ->get();
 
         return view('carsmanagement.show-car', compact('car', 'categorycosts', 'carCosts'));
     }
