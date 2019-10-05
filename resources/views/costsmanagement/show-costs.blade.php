@@ -55,13 +55,13 @@
                         <tbody>
                             @foreach($costs as $aCost)
                                 <tr>
-                                    <td>{{$aCost->id}}</td>
-                                    <td>{{$aCost->car_id}}</td>
-                                    <td>{{$aCost->category_consumption}}</td>
-									<td>{{$aCost->purchase_cost}}</td>
-									<td>{{$aCost->count}}</td>
-									<td>{{$aCost->work_price}}</td>
-                                    <td>{{$aCost->notes}}</td>
+                                    <td>{{ $aCost->id }}</td>
+                                    <td>{{ $aCost->car->side_number }}</td>
+                                    <td>{{ $aCost->category->name }}</td>
+									<td>{{ $aCost->purchase_cost }}</td>
+									<td>{{ $aCost->count }}</td>
+									<td>{{ $aCost->work_price }}</td>
+                                    <td>{{ $aCost->notes }}</td>
                                     <td>
                                         <a class="btn btn-sm btn-success btn-block" href="{{ URL::to('costs/' . $aCost->id) }}" data-toggle="tooltip" title="{{ trans('costs.costsBtnShow') }}">
                                             <i class="fa fa-eye fa-fw" aria-hidden="true"></i>
@@ -76,7 +76,7 @@
                                     </td>
                                     <td>
                                         {!! Form::open(array('url' => 'costs/' . $aCost->id, 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Delete cost')) !!}
-                                            {!! Form::hidden('_method', 'DELETE') !!}
+                                            @method('DELETE')
                                             {!! Form::button('<i class="fa fa-trash-o fa-fw" aria-hidden="true"></i> <span class="sr-only">Delete cost</span>', array('class' => 'btn btn-danger btn-sm','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmDelete', 'data-title' => trans('costs.confirmDeleteHdr'), 'data-message' => trans('costs.confirmDelete'))) !!}
                                         {!! Form::close() !!}
                                     </td>
