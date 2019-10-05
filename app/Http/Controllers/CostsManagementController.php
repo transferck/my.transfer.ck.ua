@@ -189,15 +189,10 @@ class CostsManagementController extends Controller
      */
     public function destroy($id)
     {
-        $default = Cost::findOrFail(1);
         $cost = Cost::findOrFail($id);
 
-        if ($cost->id != $default->id) {
-            $cost->delete();
+        $cost->delete();
 
-            return redirect('costs')->with('success', trans('costs.deleteSuccess'));
-        }
-
-        return back()->with('error', trans('costs.deleteSelfError'));
+        return redirect('costs')->with('success', trans('costs.deleteSuccess'));
     }
 }
