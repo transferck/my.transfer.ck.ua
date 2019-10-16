@@ -135,7 +135,7 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
     Route::get('orders-all/api', 'OrdersManagementController@allOrdersApi')->name('orders-api.all');
     Route::get('orders-index/api', 'OrdersManagementController@ordersApi')->name('orders-api.index');
     Route::get('agents/api', 'OrderAgentController@allAgentsApi')->name('agents-api.all');
-	
+
     Route::resource('cars', 'CarsManagementController', [
         'names' => [
             'index'   => 'cars',
@@ -156,7 +156,9 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
             'destroy' => 'categorycosts.destroy',
         ],
     ]);		
-	
+
+    Route::get('cars/{carId}/costs/{costcategoryId}', 'CarsManagementController@costsByCategory')
+        ->name('cars.costs_by_category');
 
 });
 

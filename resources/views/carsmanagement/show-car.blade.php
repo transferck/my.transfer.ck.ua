@@ -99,15 +99,18 @@
 			@endphp
 			<div class="col-md-2 mb-3">
 				<div class="card">
-					<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
-						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
-					</div>
-					<div class="card-body text-center">
-						<img src="{{ $aCategoryCost->img }}" alt="" class="img-fluid w-50">
-					</div>
-					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
-						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
-					</div>
+					<a href="{{ route('cars.costs_by_category', ['carId' => $car->id, 'categorycostId' => $aCategoryCost->id]) }}">
+						<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
+							<span class="badge badge-success">{{ $carCategoryCosts }}</span>
+						</div>
+						<div class="card-body text-center">
+							<img src="{{ $aCategoryCost->img }}" alt="" class="img-fluid w-50">
+						</div>
+						<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
+							<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
+						</div>
+					</a>
+
 				</div>
 				<h6 class="text-center mt-3"><b>{{ $aCategoryCost->name }}</b></h6>
 
@@ -134,6 +137,7 @@
 			@endphp
 			<div class="col-md-2 mb-3">
 				<div class="card">
+					<a href="{{ route('cars.costs_by_category', ['carId' => $car->id, 'categorycostId' => $aCategoryCost->id]) }}">
 					<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
 						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
 					</div>
@@ -143,6 +147,7 @@
 					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
 						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
 					</div>
+					</a>
 				</div>
 				<h6 class="text-center mt-3"><b>{{ $aCategoryCost->name }}</b></h6>
 
@@ -169,6 +174,7 @@
 			@endphp
 			<div class="col-md-2 mb-3">
 				<div class="card">
+					<a href="{{ route('cars.costs_by_category', ['carId' => $car->id, 'categorycostId' => $aCategoryCost->id]) }}">
 					<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
 						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
 					</div>
@@ -178,6 +184,7 @@
 					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
 						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
 					</div>
+					</a>
 				</div>
 				<h6 class="text-center mt-3"><b>{{ $aCategoryCost->name }}</b></h6>
 
