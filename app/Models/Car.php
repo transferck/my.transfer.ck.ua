@@ -109,4 +109,11 @@ class Car extends Model
 
         return $cost->mileage;
     }
+
+    public function getAllCostsSum()
+    {
+        return Cost::query()
+            ->where('car_id', $this->id)
+            ->sum(\DB::raw('purchase_cost + work_price'));
+    }
 }

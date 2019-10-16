@@ -54,9 +54,9 @@
                                     <img src="/images/icons/cars/1.jpg" alt="" class="img-fluid w-75">
                                 </div>
                             </a>
-                            <div class="price-summ d-none"
+                            <div class="price-sum"
                                  style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
-                                <span class="badge badge-success">Cумма: <b>{{$aCar->side_number}}</b></span>
+                                <span class="badge badge-success">Cумма: <b>{{ $aCar->getAllCostsSum() }}</b></span>
                             </div>
                         </div>
                         <a href="{{ URL::to('cars/' . $aCar->id) }}">
