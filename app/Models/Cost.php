@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cost extends Model
@@ -84,12 +85,22 @@ class Cost extends Model
     }
 
     /**
-     * Build Theme Relationships.
+     * Car relationship
      *
-     * @var array
+     * @return Relation
      */
     public function car()
     {
-        return $this->hasMany('App\Models\Car');
+        return $this->belongsTo(Car::class);
+    }
+
+    /**
+     * Cost Category Relationship
+     *
+     * @return Relation
+     */
+    public function category()
+    {
+        return $this->belongsTo(CategoryCost::class, 'category_consumption');
     }
 }

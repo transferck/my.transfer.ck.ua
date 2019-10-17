@@ -69,7 +69,7 @@
 										{!! Form::label('group', trans('categorycosts.groupLabel'), array('class' => 'col-md-12 control-label required')); !!}
 										<div class="col-md-12">
 											<div class="input-group">
-												{!! Form::select('group', \App\Models\CategoryCost::$GROUPS_LABELS, array('id' => 'group', 'class' => 'form-control', 'placeholder' => trans('categorycosts.groupPlaceholder'))) !!}
+												{!! Form::select('group', \App\Models\CategoryCost::$GROUPS_LABELS, $categorycost->group, array('id' => 'group', 'class' => 'form-control', 'placeholder' => trans('categorycosts.groupPlaceholder'))) !!}
 											</div>
 											@if ($errors->has('group'))
 												<span class="help-block">
