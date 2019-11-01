@@ -179,4 +179,20 @@ class CarsManagementController extends Controller
 
         return back()->with('error', trans('cars.deleteSelfError'));
     }
+
+    public function costsByCategory($carId, $costcategoryId)
+    {
+        $car = Car::find($carId);
+
+        if (!$car) {
+            throw new \Exception('Car not found');
+        }
+
+        $costs = Cost::query()
+            ->where('category_consumption', $costcategoryId)
+            ->where('car_id', $carId)
+            ->get();
+
+        return view('carsmanagement.costs-by-category', compact('costs', 'car'));
+    }
 }

@@ -40,19 +40,21 @@
 										<div class="col-md-12">	
 											<select class="form-control" name="car_id" id="car">
 												@if (isset($cost->id))
+													<option disabled selected>Не выбран</option>
 													@foreach($cars as $aCars)
 														<option value="{{ $aCars->id }}" @if($cost && $cost->car_id == $aCars->id) selected="" @endif>{{ $aCars->side_number }}</option>
 													@endforeach;
 												@else
+													<option disabled selected>Не выбран</option>
 													@foreach($cars as $aCars)
 														<option value="{{ $aCars->id }}" @if($cost && $cost->car_id == $aCars->id) selected="" @endif>{{ $aCars->side_number }}</option>
 													@endforeach;
 												@endif
 											</select>
 
-											@if ($errors->has('car'))
+											@if ($errors->has('car_id'))
 												<span class="help-block">
-													<strong>{{ $errors->first('car') }}</strong>
+													<strong>{{ $errors->first('car_id') }}</strong>
 												</span>
 											@endif
 										</div>	
@@ -64,10 +66,12 @@
 										<div class="col-md-12">
 											<select class="custom-select form-control category_consumption-select" name="category_consumption" id="category_consumption">
 												@if (isset($cost->id))
+													<option disabled selected>Не выбрана</option>
 													@foreach($categorycosts as $aCategoryCost)
 														<option value="{{ $aCategoryCost->id }}" @if($cost && $cost->categorycost_id == $aCategoryCost->id) selected="" @endif>{{ $aCategoryCost->name }}</option>
 													@endforeach;
 												@else
+													<option disabled selected>Не выбрана</option>
 													@foreach($categorycosts as $aCategoryCost)
 														<option value="{{ $aCategoryCost->id }}" @if($cost && $cost->categorycost_id == $aCategoryCost->id) selected="" @endif>{{ $aCategoryCost->name }}</option>
 													@endforeach;
@@ -89,7 +93,7 @@
 										{!! Form::label('count', trans('costs.countLabel'), array('class' => 'col-md-12 control-label required')); !!}
 										<div class="col-md-12">
 											<div class="input-group">
-												{!! Form::number('count', NULL, array('id' => 'count', 'class' => 'form-control', 'placeholder' => trans('costs.countPlaceholder'))) !!}
+												{!! Form::number('count', 1, array('id' => 'count', 'class' => 'form-control', 'placeholder' => trans('costs.countPlaceholder'))) !!}
 											</div>
 											@if ($errors->has('count'))
 												<span class="help-block">

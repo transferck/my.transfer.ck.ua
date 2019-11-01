@@ -72,7 +72,7 @@
 									<div class="form-group has-feedback {{ $errors->has('side_number') ? ' has-error ' : '' }}">
 										{!! Form::label('side_number', trans('cars.side_numberLabel'), array('class' => 'col-md-12 control-label required')); !!}
 										<div class="col-md-12">
-											{!! Form::select('side_number',  array('11' => '11', '24' => '24', '26' => '26', '42' => '42', '46' => '46', '64' => '64', '73' => '73', '74' => '74', '78' => '78', '80' => '80', '84' => '84', '93' => '93'), 'null', ['placeholder' => trans('cars.side_numberPlaceholder'), 'id' => 'side_number', 'class' => 'custom-select form-control']) !!}
+											{!! Form::select('side_number',  array('11' => '11', '24' => '24', '26' => '26', '42' => '42', '46' => '46', '64' => '64', '73' => '73', '74' => '74', '78' => '78', '80' => '80', '84' => '84', '93' => '93', '70' => '70', '33' => '33'), 'null', ['placeholder' => trans('cars.side_numberPlaceholder'), 'id' => 'side_number', 'class' => 'custom-select form-control']) !!}
 											@if ($errors->has('side_number'))
 												<span class="help-block">
 													<strong>{{ $errors->first('side_number') }}</strong>
