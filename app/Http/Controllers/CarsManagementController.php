@@ -8,13 +8,16 @@ use App\Models\Car;
 use App\Models\User;
 use App\Models\Cost;
 use App\Models\CategoryCost;
+use App\Traits\UploadTrait;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Str;
 use Validator;
 
 class CarsManagementController extends Controller
 {
+    use UploadTrait;
     /**
      * Create a new controller instance.
      *
@@ -34,7 +37,13 @@ class CarsManagementController extends Controller
     {
         $costs = Cost::all();
 
-        $cars = Car::orderBy('side_number', 'asc')->get();
+        $cars = Car::withCount(['costs' => function($q) {
+            $q->where('mileage', '!=', 0)
+                ->where('mileage', '!=', '')
+                ->whereNotNull('mileage');
+            }])
+            ->orderBy('costs_count', 'desc')
+            ->get();
 
         return View('carsmanagement.show-cars', compact('cars', 'costs'));
     }
@@ -58,7 +67,7 @@ class CarsManagementController extends Controller
      */
     public function store(Request $request)
     {
-        $input = Input::only('manufacturer', 'registration_number', 'side_number', 'purchase_date', 'mileage', 'release_date', 'condition', 'color', 'notes', 'status');
+        $input = Input::only('manufacturer', 'registration_number', 'side_number', 'purchase_date', 'purchase_price', 'mileage', 'release_date', 'condition', 'color', 'img', 'notes', 'car_status', 'status');
 
         $validator = Validator::make($input, Car::rules());
 
@@ -68,19 +77,36 @@ class CarsManagementController extends Controller
 
         $car = Car::create([
             'manufacturer'          => $request->input('manufacturer'),
-            //'model'         		=> $request->input('model'),			
+            //'model'         		=> $request->input('model'),
             'registration_number'   => $request->input('registration_number'),
             'side_number'           => $request->input('side_number'),
 			'purchase_date'         => $request->input('purchase_date'),
+			'purchase_price'        => $request->input('purchase_price'),
 			'mileage'               => $request->input('mileage'),
 			'release_date'          => $request->input('release_date'),
 			'condition'             => $request->input('condition'),
+			'img'                 	=> $request->input('img'),			
 			'color'                 => $request->input('color'),
 			'notes'                 => $request->input('notes'),
+            'car_status'            => $request->input('car_status'),
             'status'             	=> $request->input('status'),
             'taggable_id'   		=> 0,
             'taggable_type' 		=> 'car',
         ]);
+
+        if ($image = $request->file('image')) {
+            $name = Str::slug($request->input('side_number')) . $request->input('registration_number') . '_' . time();
+            $folder = 'images/cars/';
+            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+
+            $this->uploadOne($image, $folder, 'public', $name);
+
+            if ($car->image) {
+                unlink($car->image);
+            }
+
+            $car->image = 'storage/' . $filePath;
+        }
 
         $car->taggable_id = $car->id;
         $car->save();
@@ -146,12 +172,26 @@ class CarsManagementController extends Controller
     {
         $car = Car::find($id);
 
-        $input = Input::only('manufacturer', 'registration_number', 'side_number', 'purchase_date', 'mileage', 'release_date', 'condition', 'color', 'notes', 'status');
+        $input = Input::only('manufacturer', 'registration_number', 'side_number', 'purchase_date', 'purchase_price', 'mileage', 'release_date', 'condition', 'color', 'img', 'notes', 'car_status', 'status');
 
         $validator = Validator::make($input, Car::rules($id));
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
+        }
+
+        if ($image = $request->file('image')) {
+            $name = Str::slug($request->input('side_number')) . $request->input('registration_number') . '_' . time();
+            $folder = 'images/cars/';
+            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+
+            $this->uploadOne($image, $folder, 'public', $name);
+
+            if ($car->image) {
+                unlink($car->image);
+            }
+
+            $car->image = 'storage/' . $filePath;
         }
 
         $car->fill($input)->save();

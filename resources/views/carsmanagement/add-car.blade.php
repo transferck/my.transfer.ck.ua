@@ -7,6 +7,10 @@
 @section('template_fastload_css')
 @endsection
 
+@section('template_linked_css')
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.min.css" rel="stylesheet">
+@endsection
+
 @section('content')
 
     <div class="container">
@@ -27,7 +31,11 @@
                     </div>
 
 
-                    {!! Form::open(array('action' => 'CarsManagementController@store', 'method' => 'POST', 'role' => 'form')) !!}
+                    {!! Form::open([
+                    	'action' => 'CarsManagementController@store', 'method' => 'POST',
+                    	'role' => 'form',
+                    	'enctype' => 'multipart/form-data'
+					]) !!}
 
                         {!! csrf_field() !!}
 
@@ -72,7 +80,7 @@
 									<div class="form-group has-feedback {{ $errors->has('side_number') ? ' has-error ' : '' }}">
 										{!! Form::label('side_number', trans('cars.side_numberLabel'), array('class' => 'col-md-12 control-label required')); !!}
 										<div class="col-md-12">
-											{!! Form::select('side_number',  array('11' => '11', '24' => '24', '26' => '26', '42' => '42', '46' => '46', '64' => '64', '73' => '73', '74' => '74', '78' => '78', '80' => '80', '84' => '84', '93' => '93', '70' => '70', '33' => '33'), 'null', ['placeholder' => trans('cars.side_numberPlaceholder'), 'id' => 'side_number', 'class' => 'custom-select form-control']) !!}
+											{!! Form::select('side_number',  array('11' => '11', '24' => '24', '26' => '26', '33' => '33', '42' => '42', '46' => '46', '64' => '64', '70' => '70', '73' => '73', '74' => '74', '78' => '78', '80' => '80', '84' => '84', '93' => '93', '70' => '70', '33' => '33'), 'null', ['placeholder' => trans('cars.side_numberPlaceholder'), 'id' => 'side_number', 'class' => 'custom-select form-control']) !!}
 											@if ($errors->has('side_number'))
 												<span class="help-block">
 													<strong>{{ $errors->first('side_number') }}</strong>
@@ -104,7 +112,7 @@
 											<div class="input-group">
 												<div class="input-group-prepend">
 													<label class="input-group-text" for="purchase_date">
-														<i class="fa fa-fw {{ trans('cars.purchase_dateIcon') }}" aria-hidden="true"></i>
+														<i class="fa fa-fw fa-{{ trans('cars.purchase_dateIcon') }}" aria-hidden="true"></i>
 													</label>
 												</div>												
 												{!! Form::text('purchase_date', NULL, array('id' => 'purchase_date', 'class' => 'form-control flatpickr-input', 'placeholder' => trans('cars.purchase_datePlaceholder'))) !!}
@@ -118,13 +126,33 @@
 									</div>
 								</div>
 								<div class="col-sm-3">
+									<div class="form-group has-feedback {{ $errors->has('purchase_price') ? ' has-error ' : '' }}">
+										{!! Form::label('purchase_price', trans('cars.purchase_priceLabel'), array('class' => 'col-md-12 control-label required')); !!}
+										<div class="col-md-12">
+											<div class="input-group">	
+												<div class="input-group-prepend">
+													<label class="input-group-text" for="purchase_date">
+														<i class="fa fa-fw fa-{{ trans('cars.purchase_priceIcon') }}" aria-hidden="true"></i>
+													</label>
+												</div>												
+												{!! Form::text('purchase_price', NULL, array('id' => 'purchase_price', 'class' => 'form-control', 'placeholder' => trans('cars.purchase_pricePlaceholder'))) !!}
+											</div>
+											@if ($errors->has('purchase_price'))
+												<span class="help-block">
+													<strong>{{ $errors->first('purchase_price') }}</strong>
+												</span>
+											@endif
+										</div>
+									</div>
+								</div>								
+								<div class="col-sm-3">
 									<div class="form-group has-feedback {{ $errors->has('release_date') ? ' has-error ' : '' }}">
 										{!! Form::label('release_date', trans('cars.release_dateLabel'), array('class' => 'col-md-12 control-label required')); !!}
 										<div class="col-md-12">
 											<div class="input-group">
 												<div class="input-group-prepend">
 													<label class="input-group-text" for="release_date">
-														<i class="fa fa-fw {{ trans('cars.purchase_dateIcon') }}" aria-hidden="true"></i>
+														<i class="fa fa-fw fa-{{ trans('cars.release_dateIcon') }}" aria-hidden="true"></i>
 													</label>
 												</div>												
 												{!! Form::text('release_date', NULL, array('id' => 'release_date', 'class' => 'form-control flatpickr-input', 'placeholder' => trans('cars.release_datePlaceholder'))) !!}
@@ -149,7 +177,9 @@
 											@endif
 										</div>
 									</div>	
-								</div>
+								</div>									
+							</div>
+							<div class="form-row">		
 								<div class="col-sm-3">
 									<div class="form-group has-feedback {{ $errors->has('mileage') ? ' has-error ' : '' }}">
 										{!! Form::label('mileage', trans('cars.mileageLabel'), array('class' => 'col-md-12 control-label required')); !!}
@@ -157,7 +187,7 @@
 											<div class="input-group">
 												<div class="input-group-prepend">
 													<label class="input-group-text" for="mileage">
-														<i class="fa fa-fw {{ trans('cars.purchase_dateIcon') }}" aria-hidden="true"></i>
+														<i class="fa fa-fw fa-{{ trans('cars.mileageIcon') }}" aria-hidden="true"></i>
 													</label>
 												</div>												
 												{!! Form::text('mileage', NULL, array('id' => 'mileage', 'class' => 'form-control flatpickr-input', 'placeholder' => trans('cars.mileagePlaceholder'))) !!}
@@ -169,9 +199,41 @@
 											@endif
 										</div>
 									</div>
-								</div>									
-							</div>
-						
+								</div>		
+								<div class="col-sm-3">
+									<div class="form-group has-feedback {{ $errors->has('car_status') ? ' has-error ' : '' }}">
+										{!! Form::label('car_status', trans('cars.car_statusLabel'), array('class' => 'col-md-12 control-label required')); !!}
+										<div class="col-md-12">
+											{!! Form::select('car_status',  array('active' => 'На балансе', 'filmed' => 'Снят с рейса', 'sale' => 'Продано'), 'null', ['placeholder' => trans('cars.car_statusPlaceholder'), 'id' => 'car_status', 'class' => 'custom-select form-control car_status-select']) !!}	
+											@if ($errors->has('car_status'))
+												<span class="help-block">
+													<strong>{{ $errors->first('car_status') }}</strong>
+												</span>
+											@endif
+										</div>
+									</div>	
+								</div>								
+								<div class="col-sm-6">
+									<div class="form-group has-feedback {{ $errors->has('img') ? ' has-error ' : '' }}">
+										{!! Form::label('img', trans('cars.imgLabel'), array('class' => 'col-md-12 control-label required')); !!}
+										<div class="col-md-12">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<label class="input-group-text" for="mileage">
+														<i class="fa fa-fw fa-{{ trans('cars.imgIcon') }}" aria-hidden="true"></i>
+													</label>
+												</div>											
+												{!! Form::text('img', NULL, array('id' => 'img', 'class' => 'form-control', 'placeholder' => trans('cars.imgPlaceholder'))) !!}
+											</div>
+											@if ($errors->has('img'))
+												<span class="help-block">
+													<strong>{{ $errors->first('img') }}</strong>
+												</span>
+											@endif
+										</div>
+									</div>
+								</div>																		
+							</div>							
 							<div class="form-row">	
 								<div class="col-sm-12">
 									<div class="form-group has-feedback {{ $errors->has('status') ? ' has-error ' : '' }}">
@@ -189,6 +251,13 @@
 													<strong>{{ $errors->first('status') }}</strong>
 												</span>
 											@endif
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="row form-group has-feedback {{ $errors->has('image') ? ' has-error ' : '' }}">
+										<div class="col-md-6">
+											<input id="image" type="file" class="form-control" name="image">
 										</div>
 									</div>
 								</div>
@@ -235,5 +304,15 @@
 @section('footer_scripts')
 
   @include('scripts.toggleStatus')
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="{{asset('js/flatpickr.min.js')}}"></script>
+	<script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
+
+  	<script>
+		flatpickr("#purchase_date", {
+			locale: "ru",
+			dateFormat: "Y-m-d",
+		});	
+	</script>
 
 @endsection

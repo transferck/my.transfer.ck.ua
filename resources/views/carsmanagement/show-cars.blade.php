@@ -23,6 +23,23 @@
         .cars-table.table-responsive table {
             margin-bottom: 0;
         }
+		.side_number {
+			position: absolute;
+			top: -10px;
+			left: -10px;
+			font-size: 23px;
+		}
+		.side_number .badge {
+			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+			padding: .51111em .51111em;
+		}
+		.costs-sum {    
+			position: absolute;
+			bottom: -10px;
+			width: 100%;
+			text-align: center;
+			font-size: 18px;
+		}
 
     </style>
 @endsection
@@ -32,34 +49,34 @@
         <div class="row">
             <div class="col-12">
                 <span>{{ trans('cars.carsTitle') }} <strong>{{ count($cars) }}</strong> {{ trans('cars.cars') }}</span>
-                <a href="/cars/create" class="btn btn-outline-secondary pull-right mb-2">
+                <a href="/cars/create" class="btn btn-outline-secondary pull-right">
                     <i class="fa fa-fw fa-plus" aria-hidden="true"></i>
                     {{ trans('cars.btnAddCar') }}
                 </a>
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid mt-4">
         <div class="cars-list">
             <div class="row">
                 @foreach($cars as $aCar)
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-2 mb-4">
                         <div class="card">
-                            <div class="sost-summ"
-                                 style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
-                                <span class="badge badge-success ">{{$aCar->side_number}}</b></span>
+                            <div class="side_number">
+                                <span class="badge badge-pill badge-warning ">{{$aCar->side_number}}</b></span>
                             </div>
                             <a href="{{ URL::to('cars/' . $aCar->id) }}">
                                 <div class="card-body text-center p-0">
-                                    <img src="/images/icons/cars/1.jpg" alt="" class="img-fluid w-75">
+                                    <img src="{{ $aCar->getImage()  }}" alt="" class="img-fluid w-75">
                                 </div>
                             </a>
-                            <div class="price-sum"
-                                 style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
-                                <span class="badge badge-success">Cумма: <b>{{ $aCar->getAllCostsSum() }}</b></span>
+                            <div class="costs-sum">
+                                <span class="badge badge-success">Расходов: <b>{{ $aCar->getAllCostsSum() }} грн.</b></span>
+								<br>
+                                <span class="badge badge-success"><b>{{ $aCar->getLastDistance() }} км</b></span>
                             </div>
                         </div>
-                        <a href="{{ URL::to('cars/' . $aCar->id) }}">
+                        <a href="{{ URL::to('cars/' . $aCar->id) }}" class="d-none">
                             <h6 class="text-center mt-3"><b>{{$aCar->registration_number}}</b></h6>
                         </a>
 

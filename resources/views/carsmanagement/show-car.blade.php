@@ -13,6 +13,8 @@
     .list-group-responsive span.badge {
         margin-left: 7.25em;
     }
+	
+	.cars-info {font-size: 28px;}
 
     .car-details-list strong {
         width: 5.5em;
@@ -23,6 +25,8 @@
     .car-details-list span {
         margin-left: 5.5em;
     }
+	
+	
 
 @endsection
 
@@ -46,7 +50,7 @@
 		<div class="col-12 col-xl-6 offset-xl-3 text-center">
 			<h1 class="mb-4">Информация об автомобиле</h1>
 			<div class="cars-info">
-				<div class="position-absolute" style="left: 0;top: 35%;">
+				<div class="position-absolute" style="left: -30px;top: 35%;">
 					@if($car->side_number != null)
 						<div class="cost-summ" style="top: 40px;">
 							<span class="badge badge-success">{{ $car->side_number }}</span>
@@ -54,23 +58,33 @@
 					@endif	
 					@if($car->mileage != null)
 						<div class="mileage-buy" style="top: 80px;">
-							<span class="badge badge-success">{{ $car->mileage }}</span>
+							<span class="badge badge-success">Пробег до: {{ $car->mileage }} км</span>
 						</div>
 					@endif
 					@if($car->side_number != null)
 						<div class="mileage" style="top: 40px;">
-							<span class="badge badge-success">{{ $car->getLastCostMileage() }}</span>
+							<span class="badge badge-success">Сейчас: {{ $car->getLastCostMileage() }} км</span>
 						</div>
 					@endif				
 				</div>
-				<img src="/images/icons/cars/1.jpg" alt="" class="img-fluid w-75">
-				<div class="position-absolute" style="right: 0;top: 35%;">
+				<img src="{{ $car->getImage()  }}" alt="" class="img-fluid w-75">
+				<div class="position-absolute" style="right: 55px;top: 50%;">
+
 					@if($car->registration_number != null)
 						<div class="cost-summ" style="top: 80px;">
 							<span class="badge badge-success">{{ $car->registration_number }}</span>
 						</div>
 					@endif				
 				</div>	
+				<div class="position-absolute" style="right: 42%;bottom: -5%;">
+					<div class="cost-summ" style="top: 80px;">
+						<div class="badge badge-success">
+							<span class="small">Куплено за</span>
+							<br>
+							{{ $car->purchase_price }} грн.
+						</div>
+					</div>
+				</div>
 			</div>	
 			<div class="d-none">
 				<h4><span class="badge">{{ count($carCosts) }}</span> {{ trans('cars.showCosts') }}</h4>	

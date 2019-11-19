@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Themes Management Language Lines
+    | Cars Management Language Lines
     |--------------------------------------------------------------------------
     |
     */
@@ -23,6 +23,7 @@ return [
     'manufacturer'     			 	 	 => 'Марка авто',
     'manufacturerLabel'     			 => 'Марка авто',
     'manufacturerPlaceholder'  			 => 'Не выбран',
+    'release_dateIcon'           		 => 'car',		
 	
     'model'     					 	 => 'Модель',
     'modelLabel'     					 => 'Модель',
@@ -34,11 +35,18 @@ return [
 	
 	'purchase_date'     		     	 => 'Дата покупки',
 	'purchase_dateLabel'     		     => 'Дата покупки',
-    'purchase_datePlaceholder'           => '__.__.____',
+    'purchase_datePlaceholder'           => '____-__-__',
+    'purchase_dateIcon'           		 => 'calendar',	
+	
+	'purchase_price'     		     	 => 'Цена покупки',
+	'purchase_priceLabel'     		     => 'Цена',
+    'purchase_pricePlaceholder'          => 'Введите сумму',	
+    'purchase_priceIcon'           		 => 'dollar',		
 	
 	'release_date'     		     	 	 => 'Год выпуска',
 	'release_dateLabel'     		     => 'Год выпуска',
-    'release_datePlaceholder'            => 'Введите год',	
+    'release_datePlaceholder'            => '____',	
+    'release_dateIcon'           		 => 'calendar',		
 	
 	'condition'     		    	 	 => 'Состояние',
 	'conditionLabel'     		    	 => 'Состояние',
@@ -54,7 +62,18 @@ return [
 
 	'mileage'     		    		 	 => 'Пробег',
 	'mileageLabel'     		    		 => 'Пробег',
-    'mileagePlaceholder'          		 => 'Введите пробег',	
+    'mileagePlaceholder'          		 => 'Введите пробег',
+    'mileageIcon'           		 	 => 'tachometer',
+
+	'car_status'     		     	 	 => 'Статус',
+	'car_statusLabel'     		         => 'Статус авто',
+    'car_statusPlaceholder'          	 => 'Не выбран',	
+    'car_statusIcon'           			 => 'update',
+
+	'img'     		     	 			 => 'Изображение',
+	'imgLabel'     		     			 => 'Ссылка на фото',
+    'imgPlaceholder'          			 => 'Введите URL',	
+    'imgIcon'           		 		 => 'image',	
 
     'notes'       		=> 'Примечание к авто',
     'notesLabel'        => 'Примечание к авто',
@@ -69,22 +88,22 @@ return [
     'AddCar'       		=> 'Добавить авто',
 	'btnAddCar'       	=> 'Добавить авто',
 
-    // Edit Theme
-    'editTitle'         => 'Editing Theme:',
-    'editSave'          => 'Save Theme Changes',
-    'themeTitle'        => 'Theme :name',
+    // Edit Car
+    'editTitle'         => 'Editing Car:',
+    'editSave'          => 'Save Car Changes',
+    'themeTitle'        => 'Car :name',
 
     // Show Car
-    'showHeadTitle'     => 'Theme',
-    'showTitle'         => 'Theme Information',
-    'showBackBtn'       => 'Back to Themes',
-    'showUsers'         => 'Theme Users',
+    'showHeadTitle'     => 'Car',
+    'showTitle'         => 'Car Information',
+    'showBackBtn'       => 'Back to Cars',
+    'showUsers'         => 'Car Users',
     'showStatus'        => 'Status',
     'showLink'          => 'CSS Link',
     'showNotes'         => 'Notes',
     'showAdded'         => 'Added',
     'showUpdated'       => 'Updated',
-    'confirmDeleteHdr'  => 'Delete Theme',
+    'confirmDeleteHdr'  => 'Delete Car',
     'confirmDelete'     => 'Are you sure you want to delete this theme?',
 
     // Show cars
@@ -99,11 +118,11 @@ return [
     'carsBtnEdits'    => '',
 
     // Tooltips
-    'backToThemeTt'     => 'Back to Theme',
-    'backToThemesTt'    => 'Back to Themes',
+    'backToCarTt'     => 'Back to Car',
+    'backToCarsTt'    => 'Back to Cars',
 
     // Buttons
-    'backToThemeBtn'    => 'Back  <span class="hidden-xs">to Theme</span>',
-    'backToThemesBtn'   => '<span class="hidden-xs">Back to </span>Themes',
+    'backToCarBtn'    => 'Back  <span class="hidden-xs">to Car</span>',
+    'backToCarsBtn'   => '<span class="hidden-xs">Back to </span>Cars',
 
 ];

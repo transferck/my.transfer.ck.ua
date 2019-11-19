@@ -22,6 +22,8 @@ return [
     'confirm_modal_button_cancel_icon'      => 'fa-times',
     'edit_user__modal_text_confirm_title'   => 'Подтвердить сохранение',
     'edit_user__modal_text_confirm_message' => 'Пожалуйста, подтвердите ваши изменения.',
+    'edit_car__modal_text_confirm_title'   => 'Подтвердить сохранение',
+    'edit_car__modal_text_confirm_message' => 'Пожалуйста, подтвердите ваши изменения.',
 
     // Form Modal
     'form_modal_default_title'      => 'Подтвердить',

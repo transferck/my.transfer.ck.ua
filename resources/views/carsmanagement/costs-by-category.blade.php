@@ -5,7 +5,15 @@
 @endsection
 
 @section('content')
-    <div class="container">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<span>Показано все <strong>{{ $car->side_number }}</strong> авто</span>
+				<a href="/cars/{{ $car->id }}" class="btn btn-outline-secondary pull-right">Назад до авто</a>
+			</div>
+		</div>
+	</div>
+    <div class="container-fluid mt-4">
         <div class="row">
             <div class="col-12">
                 @if(count($costs))
@@ -14,12 +22,14 @@
                             <thead class="thead-dark">
                             <tr>
                                 <th class="ml-2">ID</th>
-                                <th>Бортовой номер</th>
-                                <th>Категория</th>
-                                <th>Цена</th>
-                                <th>Шт.</th>
-                                <th>Работа</th>
-                                <th>Примечание</th>
+                                {{-- <th>Бортовой номер</th> --}}
+								<th>Дата</th>
+								<th>Наименование</th>
+                                <th>Категория рассходов</th>
+								<th>Шт.</th>
+                                <th>Цена, грн.</th>
+                                <th>Работа, грн.</th>
+								<th>Общая сумма</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -29,12 +39,14 @@
                             @foreach($costs as $cost)
                                 <tr>
                                     <td>{{ $cost->id }}</td>
-                                    <td>{{ $cost->car->side_number }}</td>
+                                    {{-- <td>{{ $cost->car->side_number }}</td> --}}
+									<td>{{ $cost->updated_at }}</td>
+									<td>{{ $cost->notes }}</td>
                                     <td>{{ $cost->category->name }}</td>
+                                    <td>{{ $cost->count }}</td>									
                                     <td>{{ $cost->purchase_cost }}</td>
-                                    <td>{{ $cost->count }}</td>
                                     <td>{{ $cost->work_price }}</td>
-                                    <td>{{ $cost->notes }}</td>
+									<td>{{ $cost->purchase_cost +  $cost->work_price}}</td>
                                     <td>
                                         <a class="btn btn-sm btn-success btn-block" href="{{ URL::to('costs/' . $cost->id) }}" data-toggle="tooltip" title="{{ trans('costs.costsBtnShow') }}">
                                             <i class="fa fa-eye fa-fw" aria-hidden="true"></i>

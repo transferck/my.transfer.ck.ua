@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Car extends Model
@@ -32,18 +33,21 @@ class Car extends Model
      */
     protected $fillable = [
 		'manufacturer', 
-		//'model', 
-		'registration_number', 
+		'registration_number',
 		'side_number', 
-		'purchase_date', 
+		'purchase_date',
+		'purchase_price',
 		'mileage', 
 		'release_date', 
 		'condition', 
-		'color', 
+		'color',
+		'img', 
 		'notes', 
+		'car_status',
 		'status',
         'taggable_id',
         'taggable_type',
+        'image',
     ];
 
     /**
@@ -66,17 +70,15 @@ class Car extends Model
     {
         return array_merge(
             [
-                //'name'   => 'required|min:3|max:50|unique:themes,name'.($id ? ",$id" : ''),
-                //'link'   => 'required|min:3|max:255|unique:themes,link'.($id ? ",$id" : ''),
 				'manufacturer'  => 'required',
-				//'model'  => 'required',
 				'registration_number'  => 'required',
 				'side_number'  => 'required',
 				'purchase_date'  => 'required',
 				'mileage'  => 'required',
 				'release_date'  => 'required',
 				'condition'  => 'required',
-				'color' => 'required', 			
+				'color' => 'required', 	
+				//'img' => 'required', 			
                 'notes'  => 'max:500',
                 'status' => 'required',
             ],
@@ -87,10 +89,22 @@ class Car extends Model
      * Build Theme Relationships.
      *
      * @var array
+     * @return Relation
      */
     public function profile()
     {
         return $this->hasMany('App\Models\Profile');
+    }
+
+    /**
+     * Build Theme Relationships.
+     *
+     * @var array
+     * @return Relation
+     */
+    public function costs()
+    {
+        return $this->hasMany('App\Models\Cost');
     }
 
     public function getLastCostMileage()
@@ -115,5 +129,31 @@ class Car extends Model
         return Cost::query()
             ->where('car_id', $this->id)
             ->sum(\DB::raw('purchase_cost + work_price'));
+    }
+
+    public function getLastDistance()
+    {
+        $cost = Cost::query()
+            ->where('car_id', $this->id)
+            ->whereNotNull('mileage')
+            ->where('mileage', '!=', 0)
+            ->where('mileage', '!=', '')
+            ->orderBy('updated_at', 'DESC')
+            ->first();
+
+        if (!$cost) {
+            return 0;
+        }
+
+        return $cost->mileage;
+    }
+
+    public function getImage()
+    {
+        if ($this->image) {
+            return '/' . $this->image;
+        }
+
+        return '/images/icons/cars/1.jpg';
     }
 }
