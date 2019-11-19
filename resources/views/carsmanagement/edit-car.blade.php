@@ -47,7 +47,7 @@
                         </div>
                     </div>
 
-                    {!! Form::model($car, array('action' => array('CarsManagementController@update', $car->id), 'method' => 'PUT')) !!}
+                    {!! Form::model($car, array('action' => array('CarsManagementController@update', $car->id), 'method' => 'PUT', 'enctype' => 'multipart/form-data')) !!}
 
                         {!! csrf_field() !!}
 
@@ -208,6 +208,15 @@
 													<strong>{{ $errors->first('status') }}</strong>
 												</span>
 											@endif
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="row form-group has-feedback {{ $errors->has('image') ? ' has-error ' : '' }}">
+										<div class="col-md-6">
+											<div class="col-md-6">
+												{!! Form::file('image') !!}
+											</div>
 										</div>
 									</div>
 								</div>

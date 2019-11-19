@@ -47,16 +47,18 @@
                         <div class="card">
                             <div class="sost-summ"
                                  style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
-                                <span class="badge badge-success ">{{$aCar->side_number}}</b></span>
+                                <span class="badge badge-success"><b>{{$aCar->side_number}}</b></span>
                             </div>
                             <a href="{{ URL::to('cars/' . $aCar->id) }}">
                                 <div class="card-body text-center p-0">
-                                    <img src="/images/icons/cars/1.jpg" alt="" class="img-fluid w-75">
+                                    <img src="{{ $aCar->getImage() }}" alt="" class="img-fluid w-75">
                                 </div>
                             </a>
                             <div class="price-sum"
                                  style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
                                 <span class="badge badge-success">Cумма: <b>{{ $aCar->getAllCostsSum() }}</b></span>
+                                <br>
+                                <span class="badge badge-success"><b>{{ $aCar->getLastDistance() }} km</b></span>
                             </div>
                         </div>
                         <a href="{{ URL::to('cars/' . $aCar->id) }}">

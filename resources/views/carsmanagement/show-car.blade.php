@@ -63,7 +63,7 @@
 						</div>
 					@endif				
 				</div>
-				<img src="/images/icons/cars/1.jpg" alt="" class="img-fluid w-75">
+				<img src="{{ $car->getImage()  }}" alt="" class="img-fluid w-75">
 				<div class="position-absolute" style="right: 0;top: 35%;">
 					@if($car->registration_number != null)
 						<div class="cost-summ" style="top: 80px;">

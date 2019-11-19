@@ -27,7 +27,11 @@
                     </div>
 
 
-                    {!! Form::open(array('action' => 'CarsManagementController@store', 'method' => 'POST', 'role' => 'form')) !!}
+                    {!! Form::open([
+                    	'action' => 'CarsManagementController@store', 'method' => 'POST',
+                    	'role' => 'form',
+                    	'enctype' => 'multipart/form-data'
+					]) !!}
 
                         {!! csrf_field() !!}
 
@@ -189,6 +193,13 @@
 													<strong>{{ $errors->first('status') }}</strong>
 												</span>
 											@endif
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="row form-group has-feedback {{ $errors->has('image') ? ' has-error ' : '' }}">
+										<div class="col-md-6">
+											<input id="image" type="file" class="form-control" name="image">
 										</div>
 									</div>
 								</div>
