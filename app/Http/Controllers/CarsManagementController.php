@@ -36,14 +36,11 @@ class CarsManagementController extends Controller
     public function index()
     {
         $costs = Cost::all();
+        $cars = Car::all();
 
-        $cars = Car::withCount(['costs' => function($q) {
-            $q->where('mileage', '!=', 0)
-                ->where('mileage', '!=', '')
-                ->whereNotNull('mileage');
-            }])
-            ->orderBy('costs_count', 'desc')
-            ->get();
+        $cars = $cars->sortBy(function ($car) {
+            return $car->getAllCostsSum();
+        });
 
         return View('carsmanagement.show-cars', compact('cars', 'costs'));
     }
