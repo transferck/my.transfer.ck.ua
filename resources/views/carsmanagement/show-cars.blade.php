@@ -83,9 +83,9 @@
                                 <div class="card-body text-center p-0">
                                     <img src="{{ $aCar->getImage()  }}" alt="" class="img-fluid w-75">
                                 </div>
-                            </a>
-                            <div class="costs-sum">
-                                <span class="badge badge-success">Расходов: <b>{{ $aCar->getAllCostsSum() }} грн.</b></span>
+                            </a> 
+                            <div class="costs-sum" data-toggle="tooltip" title="Расходов на авто">
+                                <span class="badge badge-success"><b>{{ $aCar->getAllCostsSum() }} грн.</b></span>
                             </div>
                         </div>
                         <a href="{{ URL::to('cars/' . $aCar->id) }}" class="d-none">
