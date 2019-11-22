@@ -26,7 +26,27 @@
         margin-left: 5.5em;
     }
 	
-	
+	.side_number {
+		position: absolute;
+		top: -10px;
+		left: -10px;
+		font-size: 23px;
+	}
+	.side_number .badge {
+		box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+		padding: 0;
+		width: 35px;
+		height: 35px;
+		text-align: center;
+		line-height: 35px;
+	}
+	.costs-sum {    
+		position: absolute;
+		bottom: -10px;
+		width: 100%;
+		text-align: center;
+		font-size: 18px;
+	}	
 
 @endsection
 
@@ -114,15 +134,15 @@
 			<div class="col-md-2 mb-3">
 				<div class="card">
 					<a href="{{ route('cars.costs_by_category', ['carId' => $car->id, 'categorycostId' => $aCategoryCost->id]) }}">
-						<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
-							<span class="badge badge-success">{{ $carCategoryCosts }}</span>
-						</div>
+						<div class="side_number">
+							<span class="badge badge-pill badge-warning ">{{ $carCategoryCosts }}</span>
+						</div>						
 						<div class="card-body text-center">
 							<img src="{{ $aCategoryCost->img }}" alt="" class="img-fluid w-50">
 						</div>
-						<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
-							<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
-						</div>
+						<div class="costs-sum" data-toggle="tooltip" title="Расходов на авто">
+							<span class="badge badge-success"><b>{{ $costsByCarCategory->sum }} грн.</b></span>
+						</div>						
 					</a>
 
 				</div>
@@ -152,15 +172,15 @@
 			<div class="col-md-2 mb-3">
 				<div class="card">
 					<a href="{{ route('cars.costs_by_category', ['carId' => $car->id, 'categorycostId' => $aCategoryCost->id]) }}">
-					<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
-						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
-					</div>
-					<div class="card-body text-center">
-						<img src="{{ $aCategoryCost->img }}" alt="" class="img-fluid w-50">
-					</div>
-					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
-						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
-					</div>
+						<div class="side_number">
+							<span class="badge badge-pill badge-warning">{{ $carCategoryCosts }}</span>
+						</div>	
+						<div class="card-body text-center">
+							<img src="{{ $aCategoryCost->img }}" alt="" class="img-fluid w-50">
+						</div>
+						<div class="costs-sum" data-toggle="tooltip" title="Расходов на авто">
+							<span class="badge badge-success"><b>{{ $costsByCarCategory->sum }} грн.</b></span>
+						</div>	
 					</a>
 				</div>
 				<h6 class="text-center mt-3"><b>{{ $aCategoryCost->name }}</b></h6>
@@ -189,15 +209,15 @@
 			<div class="col-md-2 mb-3">
 				<div class="card">
 					<a href="{{ route('cars.costs_by_category', ['carId' => $car->id, 'categorycostId' => $aCategoryCost->id]) }}">
-					<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
-						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
-					</div>
-					<div class="card-body text-center">
-						<img src="{{ $aCategoryCost->img }}" alt="" class="img-fluid w-50">
-					</div>
-					<div class="price-summ" style="position: absolute;bottom: -10px;width: 100%;text-align: center;">
-						<span class="badge badge-success">Cумма: <b>{{ $costsByCarCategory->sum }} грн.</b></span>
-					</div>
+						<div class="side_number">
+							<span class="badge badge-pill badge-warning ">{{ $carCategoryCosts }}</span>
+						</div>	
+						<div class="card-body text-center">
+							<img src="{{ $aCategoryCost->img }}" alt="" class="img-fluid w-50">
+						</div>
+						<div class="costs-sum" data-toggle="tooltip" title="Расходов на авто">
+							<span class="badge badge-success"><b>{{ $costsByCarCategory->sum }} грн.</b></span>
+						</div>	
 					</a>
 				</div>
 				<h6 class="text-center mt-3"><b>{{ $aCategoryCost->name }}</b></h6>

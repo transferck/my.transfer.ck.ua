@@ -31,7 +31,11 @@
 		}
 		.side_number .badge {
 			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
-			padding: .51111em .51111em;
+			padding: 0;
+			width: 35px;
+			height: 35px;
+			text-align: center;
+			line-height: 35px;
 		}
 		.costs-sum {    
 			position: absolute;

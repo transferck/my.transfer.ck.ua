@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<span>Показано все <strong>{{ $car->side_number }}</strong> авто</span>
+				<span>Показано расходов ( ) для авто <strong>{{ $car->side_number }}</strong></span>
 				<a href="/cars/{{ $car->id }}" class="btn btn-outline-secondary pull-right">Назад до авто</a>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
                                 <tr>
                                     <td>{{ $cost->id }}</td>
                                     {{-- <td>{{ $cost->car->side_number }}</td> --}}
-									<td>{{ $cost->updated_at }}</td>
+									<td>{{ \Carbon\Carbon::parse($cost->updated_at)->format('d.m.Y')}}</td>
 									<td>{{ $cost->notes }}</td>
                                     <td>{{ $cost->category->name }}</td>
                                     <td>{{ $cost->count }}</td>									
