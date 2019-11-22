@@ -40,7 +40,16 @@
 			text-align: center;
 			font-size: 18px;
 		}
-
+		.tachometer {
+			position: absolute;
+			top: 30px;
+			right: -12px;
+			font-size: 16px;
+		}
+		.tachometer .badge {
+			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+			padding: .61111em .51111em;
+		}
     </style>
 @endsection
 
@@ -63,7 +72,12 @@
                     <div class="col-md-2 mb-4">
                         <div class="card">
                             <div class="side_number">
-                                <span class="badge badge-pill badge-warning ">{{$aCar->side_number}}</b></span>
+                                <span class="badge badge-pill badge-warning ">{{$aCar->side_number}}</span>
+                            </div>
+							<div class="tachometer" data-toggle="tooltip" title="{{ $aCar->getLastDistance() }} км">
+                                <span class="badge badge-pill badge-light"> 
+									<i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>
+								</span>
                             </div>
                             <a href="{{ URL::to('cars/' . $aCar->id) }}">
                                 <div class="card-body text-center p-0">
@@ -72,8 +86,6 @@
                             </a>
                             <div class="costs-sum">
                                 <span class="badge badge-success">Расходов: <b>{{ $aCar->getAllCostsSum() }} грн.</b></span>
-								<br>
-                                <span class="badge badge-success"><b>{{ $aCar->getLastDistance() }} км</b></span>
                             </div>
                         </div>
                         <a href="{{ URL::to('cars/' . $aCar->id) }}" class="d-none">
