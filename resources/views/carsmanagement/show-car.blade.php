@@ -228,7 +228,7 @@
 
 	<div class="row pt-5">
 		<div class="col-sm-6 mb-2">
-			<a href="/cars/{{$car->id}}/edit" class="btn btn-small btn-info btn-block">
+			<a href="/cars/{{$car->registration_number}}/edit" class="btn btn-small btn-info btn-block">
 				<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Edit<span class="hidden-sm"> this</span><span class="hidden-sm"> car</span>
 			</a>
 		</div>
