@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<span>Показано <strong>{{ count($costs) }}</strong> расходов для <strong>{{ $car->side_number }}</strong> авто</span>
+				<span>Показано расходов ({{ count($costs) }}) для авто <strong>{{ $car->side_number }}</strong> авто</span>
 				<a href="/cars/{{ $car->id }}" class="btn btn-outline-secondary pull-right">Назад до авто</a>
 			</div>
 		</div>

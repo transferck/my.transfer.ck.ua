@@ -38,7 +38,7 @@ class CarsManagementController extends Controller
         $costs = Cost::all();
         $cars = Car::all();
 
-        $cars = $cars->sortBy(function ($car) {
+        $cars = $cars->sortByDesc(function ($car) {
             return $car->getAllCostsSum();
         });
 
