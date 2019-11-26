@@ -108,7 +108,7 @@ class CarsManagementController extends Controller
         $car->taggable_id = $car->id;
         $car->save();
 
-        return redirect('cars/'.$car->id)->with('success', trans('cars.createSuccess'));
+        return redirect('cars/'.$car->registration_number)->with('success', trans('cars.createSuccess'));
     }
 
     /**
@@ -118,9 +118,9 @@ class CarsManagementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($registration_number)
     {
-        $car = Car::find($id);
+        $car = Car::where(['registration_number' => $registration_number])->first();
         $categorycosts = CategoryCost::getInGroups();
 
         $carCosts = Cost::query()
@@ -137,9 +137,9 @@ class CarsManagementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($registration_number)
     {
-        $car = Car::find($id);
+        $car = Car::where(['registration_number' => $registration_number])->first();
         $users = User::all();
         $themeUsers = [];
 
@@ -165,13 +165,13 @@ class CarsManagementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $registration_number)
     {
-        $car = Car::find($id);
+        $car = Car::where(['registration_number' => $registration_number])->first();
 
         $input = Input::only('manufacturer', 'registration_number', 'side_number', 'purchase_date', 'purchase_price', 'mileage', 'release_date', 'condition', 'color', 'img', 'notes', 'car_status', 'status');
 
-        $validator = Validator::make($input, Car::rules($id));
+        $validator = Validator::make($input, Car::rules($car->id));
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -193,7 +193,7 @@ class CarsManagementController extends Controller
 
         $car->fill($input)->save();
 
-        return redirect('cars/'.$car->id)->with('success', trans('cars.updateSuccess'));
+        return redirect('cars/'.$car->registration_number)->with('success', trans('cars.updateSuccess'));
     }
 
     /**
@@ -203,10 +203,10 @@ class CarsManagementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($registration_number)
     {
         $default = Car::findOrFail(1);
-        $car = Car::findOrFail($id);
+        $car = Car::where(['registration_number' => $registration_number])->first();
 
         if ($car->id != $default->id) {
             $car->delete();
@@ -217,9 +217,9 @@ class CarsManagementController extends Controller
         return back()->with('error', trans('cars.deleteSelfError'));
     }
 
-    public function costsByCategory($carId, $costcategoryId)
+    public function costsByCategory($registration_number, $costcategoryId)
     {
-        $car = Car::find($carId);
+        $car = Car::where(['registration_number' => $registration_number])->first();
 
         if (!$car) {
             throw new \Exception('Car not found');
@@ -227,7 +227,8 @@ class CarsManagementController extends Controller
 
         $costs = Cost::query()
             ->where('category_consumption', $costcategoryId)
-            ->where('car_id', $carId)
+            ->where('car_id', $car->id)
+            ->orderBy('created_at', 'DESC')
             ->get();
 
         return view('carsmanagement.costs-by-category', compact('costs', 'car'));

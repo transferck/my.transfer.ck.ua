@@ -157,7 +157,7 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
         ],
     ]);		
 
-    Route::get('cars/{carId}/costs/{costcategoryId}', 'CarsManagementController@costsByCategory')
+    Route::get('cars/{registration_number}/costs/{costcategoryId}', 'CarsManagementController@costsByCategory')
         ->name('cars.costs_by_category');
 
 });

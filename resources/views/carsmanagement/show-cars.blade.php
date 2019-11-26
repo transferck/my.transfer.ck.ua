@@ -65,7 +65,7 @@
                             <div class="side_number">
                                 <span class="badge badge-pill badge-warning ">{{$aCar->side_number}}</b></span>
                             </div>
-                            <a href="{{ URL::to('cars/' . $aCar->id) }}">
+                            <a href="{{ URL::to('cars/' . $aCar->registration_number) }}">
                                 <div class="card-body text-center p-0">
                                     <img src="{{ $aCar->getImage()  }}" alt="" class="img-fluid w-75">
                                 </div>
@@ -76,7 +76,7 @@
                                 <span class="badge badge-success"><b>{{ $aCar->getLastDistance() }} км</b></span>
                             </div>
                         </div>
-                        <a href="{{ URL::to('cars/' . $aCar->id) }}" class="d-none">
+                        <a href="{{ URL::to('cars/' . $aCar->registration_number) }}" class="d-none">
                             <h6 class="text-center mt-3"><b>{{$aCar->registration_number}}</b></h6>
                         </a>
 

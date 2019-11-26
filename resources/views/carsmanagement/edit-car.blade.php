@@ -51,7 +51,7 @@
                         </div>
                     </div>
 
-                    {!! Form::model($car, array('action' => array('CarsManagementController@update', $car->id), 'method' => 'PUT', 'enctype' => 'multipart/form-data')) !!}
+                    {!! Form::model($car, array('action' => array('CarsManagementController@update', $car->registration_number), 'method' => 'PUT', 'enctype' => 'multipart/form-data')) !!}
 
                         {!! csrf_field() !!}
 
