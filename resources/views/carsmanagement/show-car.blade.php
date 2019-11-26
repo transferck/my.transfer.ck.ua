@@ -133,7 +133,7 @@
 			@endphp
 			<div class="col-md-2 mb-3">
 				<div class="card">
-					<a href="{{ route('cars.costs_by_category', ['carId' => $car->id, 'categorycostId' => $aCategoryCost->id]) }}">
+					<a href="{{ route('cars.costs_by_category', ['carId' => $car->registration_number, 'categorycostId' => $aCategoryCost->id]) }}">
 						<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
 							<span class="badge badge-success">{{ $carCategoryCosts }}</span>
 						</div>
@@ -171,7 +171,7 @@
 			@endphp
 			<div class="col-md-2 mb-3">
 				<div class="card">
-					<a href="{{ route('cars.costs_by_category', ['carId' => $car->id, 'categorycostId' => $aCategoryCost->id]) }}">
+					<a href="{{ route('cars.costs_by_category', ['carId' => $car->registration_number, 'categorycostId' => $aCategoryCost->id]) }}">
 					<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
 						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
 					</div>
@@ -208,7 +208,7 @@
 			@endphp
 			<div class="col-md-2 mb-3">
 				<div class="card">
-					<a href="{{ route('cars.costs_by_category', ['carId' => $car->id, 'categorycostId' => $aCategoryCost->id]) }}">
+					<a href="{{ route('cars.costs_by_category', ['carId' => $car->registration_number, 'categorycostId' => $aCategoryCost->id]) }}">
 					<div class="sost-summ" style="position: absolute;top: -10px;left: -10px;width: 100%;text-align: left;">
 						<span class="badge badge-success">{{ $carCategoryCosts }}</span>
 					</div>
