@@ -131,6 +131,15 @@ class Car extends Model
             ->sum(\DB::raw('purchase_cost + work_price'));
     }
 
+    public function getCostsSum()
+    {
+        return Cost::query()
+            ->where('car_id', $this->id)
+            ->where('category_consumption', '!=', 9)
+            ->where('category_consumption', '!=', 10)
+            ->sum(\DB::raw('purchase_cost + work_price'));
+    }
+
     public function getLastDistance()
     {
         $cost = Cost::query()

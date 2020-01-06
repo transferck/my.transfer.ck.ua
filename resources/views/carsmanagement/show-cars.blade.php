@@ -89,7 +89,7 @@
                                 </div>
                             </a> 
                             <div class="costs-sum" data-toggle="tooltip" title="Расходов на авто">
-                                <span class="badge badge-success"><b>{{ $aCar->getAllCostsSum() }} грн.</b></span>
+                                <span class="badge badge-success"><b>{{ $aCar->getCostsSum() }} грн.</b></span>
                             </div>
                         </div>
                         <a href="{{ URL::to('cars/' . $aCar->registration_number) }}" class="d-none">
