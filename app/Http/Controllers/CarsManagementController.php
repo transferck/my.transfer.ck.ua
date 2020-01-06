@@ -39,7 +39,8 @@ class CarsManagementController extends Controller
         $cars = Car::all();
 
         $cars = $cars->sortByDesc(function ($car) {
-            return $car->getAllCostsSum();
+            //return $car->getAllCostsSum();
+			return $car->getLastCostMileage();
         });
 
         return View('carsmanagement.show-cars', compact('cars', 'costs'));
